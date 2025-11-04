@@ -1,9 +1,5 @@
 "use client"
 import React from "react"
-import Pricing from "../components/Pricing"
-import Benefits from "../components/Benefits"
-import Testimonials from "../components/Testimonials"
-import FAQ from "../components/FAQ"
 
 function currency(n){ return new Intl.NumberFormat("it-IT",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(n||0) }
 function stimaValore({ mq, base, stato, piano, asc, box }) {
@@ -20,15 +16,14 @@ export default function Page() {
     stato: "normale", piano: 1, asc: true, box: "no"
   })
   const [utm, setUtm] = React.useState({ utm_source:"", utm_medium:"", utm_campaign:"", referrer:"" })
-  const [selectedPlan, setSelectedPlan] = React.useState("Report gratuito")
   const valore = stimaValore(f)
 
   React.useEffect(() => {
-    const params = new URLSearchParams(window.location.search)
+    const p = new URLSearchParams(window.location.search)
     setUtm({
-      utm_source: params.get("utm_source") || "",
-      utm_medium: params.get("utm_medium") || "",
-      utm_campaign: params.get("utm_campaign") || "",
+      utm_source: p.get("utm_source") || "",
+      utm_medium: p.get("utm_medium") || "",
+      utm_campaign: p.get("utm_campaign") || "",
       referrer: document.referrer || ""
     })
   }, [])
@@ -40,27 +35,17 @@ export default function Page() {
 
   return (
     <main style={{ fontFamily:'system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial', color:'#111' }}>
-      {/* USP sticky bar */}
-      <div style={{position:'sticky',top:0,zIndex:40, background:'#111',color:'#fff', padding:'8px 12px', textAlign:'center', fontSize:14}}>
-        Valutazione online in pochi minuti • Nessun appuntamento in agenzia • Dati chiari e trasparenti
-      </div>
-
       {/* HERO */}
       <section style={{ padding:'56px 16px', borderBottom:'1px solid #eee' }}>
         <div style={{ maxWidth:1100, margin:'0 auto', display:'grid', gap:24, gridTemplateColumns:'1.2fr 1fr' }}>
           <div>
             <div style={{ fontSize:12, letterSpacing:1, textTransform:'uppercase', color:'#666' }}>Twenty-Nine · Valutazione Online</div>
             <h1 style={{ fontSize:44, lineHeight:1.1, margin:'8px 0 12px' }}>
-              Niente agenzia. La tua casa <span style={{whiteSpace:'nowrap'}}>valutata in 2 minuti</span>.
+              Niente agenzia. La tua casa valutata in 2 minuti.
             </h1>
             <p style={{ color:'#444', marginTop:0 }}>
-              Stima immediata + report. Se vuoi, perizia completa firmata. Tutto online, senza appuntamenti, senza pressioni.
+              Stima immediata + report. Se vuoi, perizia completa firmata. Tutto online.
             </p>
-            <ul style={{ lineHeight:1.8, color:'#333', paddingLeft:18, marginTop:12 }}>
-              <li>Comparabili reali e range di mercato</li>
-              <li>Trasparenza totale: capisci <i>perché</i> quel valore</li>
-              <li>Se vendi, passiamo il lead direttamente a Twenty-Nine</li>
-            </ul>
             <a href="#calcolatore" style={{ display:'inline-block', marginTop:16, padding:'12px 16px', borderRadius:10, background:'black', color:'white', textDecoration:'none' }}>
               Calcola subito il valore
             </a>
@@ -69,28 +54,12 @@ export default function Page() {
             <div style={{ fontSize:14, color:'#666' }}>Anteprima stima</div>
             <div style={{ fontSize:36, fontWeight:800 }}>{currency(valore)}</div>
             <div style={{ color:'#666' }}>Affina i parametri nel calcolatore qui sotto.</div>
-            <div style={{marginTop:12, fontSize:12, color:'#888'}}>Garanzia soddisfatti o rimborsati sul Report Pro 7 giorni.</div>
           </div>
         </div>
       </section>
 
-      {/* HOW IT WORKS */}
-      <section style={{ padding:'28px 16px', background:'#fafafa', borderBottom:'1px solid #eee' }}>
-        <div style={{ maxWidth:1100, margin:'0 auto', display:'grid', gap:12, gridTemplateColumns:'repeat(3,minmax(0,1fr))' }}>
-          {[
-            {t:'Inserisci pochi dati',d:'mq, stato, piano, box'},
-            {t:'Vedi subito la stima',d:'range con logica chiara'},
-            {t:'Scegli il pacchetto',d:'gratis, report, perizia'}
-          ].map((c,i)=>(
-            <div key={i} style={{border:'1px solid #eee', borderRadius:12, padding:16, background:'#fff'}}>
-              <b>{c.t}</b><div style={{color:'#555'}}>{c.d}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* CALCOLATORE + LEAD FORM */}
-      <section id="calcolatore" style={{ padding:'32px 16px', borderBottom:'1px solid #eee' }}>
+      {/* CALCOLATORE + FORM LEAD */}
+      <section id="calcolatore" style={{ padding:'32px 16px', background:'#fafafa', borderBottom:'1px solid #eee' }}>
         <div style={{ maxWidth:1100, margin:'0 auto', display:'grid', gap:24, gridTemplateColumns:'1.2fr 1fr' }}>
           {/* Calcolatore */}
           <div style={{ border:'1px solid #eee', borderRadius:12, padding:16, background:'white' }}>
@@ -138,16 +107,15 @@ export default function Page() {
             </div>
           </div>
 
-          {/* Lead form */}
+          {/* Form Lead (Netlify) */}
           <div style={{ border:'1px solid #eee', borderRadius:12, padding:16, background:'white' }}>
             <h3 style={{ marginTop:0 }}>Scarica il report gratuito</h3>
-            <p style={{ color:'#444', marginTop:0 }}>Ricevi il PDF con range e comparabili. Se desideri, ti contattiamo per vendere con Twenty-Nine.</p>
+            <p style={{ color:'#444', marginTop:0 }}>PDF con range e comparabili. Se vuoi, ti contattiamo per vendere con Twenty-Nine.</p>
 
             <form name="lead-valutacasa" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you" style={{ display:'grid', gap:12 }}>
               <input type="hidden" name="form-name" value="lead-valutacasa" />
               <p hidden><label>Non compilare: <input name="bot-field" /></label></p>
 
-              {/* Dati contatto */}
               <label>Nome e cognome
                 <input name="nome" required style={inp}/>
               </label>
@@ -158,26 +126,14 @@ export default function Page() {
                 <input name="tel" required style={inp}/>
               </label>
 
-              {/* Dati immobile hidden */}
+              {/* hidden con dati immobile + utm */}
               {Object.entries({
                 indirizzo:f.indirizzo, cap:f.cap, mq:String(f.mq), base:String(f.base),
                 stato:f.stato, piano:String(f.piano), asc:f.asc ? "sì":"no", box:f.box,
-                valore_stimato:String(valore)
+                valore_stimato:String(valore),
+                utm_source:utm.utm_source, utm_medium:utm.utm_medium, utm_campaign:utm.utm_campaign, referrer:utm.referrer
               }).map(([k,v])=> <input key={k} type="hidden" name={k} value={v} />)}
 
-              {/* UTM / referrer */}
-              {Object.entries(utm).map(([k,v])=> <input key={k} type="hidden" name={k} value={v} />)}
-
-              {/* Piano selezionato dal pricing */}
-              <input type="hidden" name="piano_scelto" value={selectedPlan} />
-
-              {/* Add-on bump */}
-              <label style={{ display:'flex', alignItems:'start', gap:8, fontSize:14, color:'#444' }}>
-                <input type="checkbox" name="addon_foto" />
-                Aggiungi <b style={{marginLeft:4}}>pacchetto foto base</b> (+€29): 10 scatti pro per annuncio.
-              </label>
-
-              {/* Consenso */}
               <label style={{ display:'flex', alignItems:'start', gap:8, fontSize:14, color:'#444' }}>
                 <input type="checkbox" name="consenso_contatto" required/>
                 Autorizzo il contatto per inviarmi il report e proposte di vendita con Twenty-Nine.
@@ -192,18 +148,6 @@ export default function Page() {
           </div>
         </div>
       </section>
-
-      {/* BENEFIT DISTINCTIVE */}
-      <Benefits />
-
-      {/* PRICING con psicologia acquisto */}
-      <Pricing onSelectPlan={(p)=>setSelectedPlan(p)} />
-
-      {/* SOCIAL PROOF */}
-      <Testimonials />
-
-      {/* FAQ */}
-      <FAQ />
     </main>
   )
 }

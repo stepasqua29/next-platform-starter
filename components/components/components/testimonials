@@ -1,0 +1,23 @@
+"use client"
+export default function Testimonials(){
+  const t = [
+    {n:"Gabriele P.", q:"“In 24 ore avevo range e comparabili. Niente visite inutili.”"},
+    {n:"Sara L.", q:"“Report Pro chiarissimo. Ho capito esattamente perché chiedere quella cifra.”"},
+    {n:"Marta R.", q:"“Passaggio a Twenty-Nine e vendita in tempi rapidi.”"},
+  ]
+  return (
+    <section style={{padding:'32px 16px', borderTop:'1px solid #eee', background:'#fafafa'}}>
+      <div style={{maxWidth:1100, margin:'0 auto'}}>
+        <h3 style={{marginTop:0}}>Cosa dicono i clienti</h3>
+        <div style={{display:'grid', gap:12, gridTemplateColumns:'repeat(3,minmax(0,1fr))'}}>
+          {t.map((x,i)=>(
+            <div key={i} style={{border:'1px solid #eee', borderRadius:12, padding:16, background:'#fff'}}>
+              <div style={{color:'#333'}}>{x.q}</div>
+              <div style={{marginTop:8, fontSize:12, color:'#666'}}>— {x.n}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}

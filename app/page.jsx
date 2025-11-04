@@ -18,29 +18,44 @@ const ctx = getNetlifyContext();
 
 export default function Page() {
     return (
-        <div className="flex flex-col gap-12 sm:gap-16">
-            <section>
-                <ContextAlert className="mb-6" />
-                <h1 className="mb-4">Netlify Platform Starter – Next.js</h1>
-                <p className="mb-6 text-lg">
-                    Deploy the latest version of Next.js — including Turbopack, React Compiler, and the new caching APIs
-                    — on Netlify in seconds. No configuration or custom adapter required.
-                </p>
-                <Link href="https://docs.netlify.com/frameworks/next-js/overview/" className="btn btn-lg sm:min-w-64">
-                    Read the Docs
-                </Link>
-            </section>
-            {!!ctx && (
-                <section className="flex flex-col gap-4">
-                    <Markdown content={contextExplainer} />
-                    <RuntimeContextCard />
-                </section>
-            )}
-            <section className="flex flex-col gap-4">
-                <Markdown content={preDynamicContentExplainer} />
-                <RandomQuote />
-            </section>
-        </div>
+        <main style={{ fontFamily: 'system-ui, -apple-system, Roboto, Helvetica, Arial', padding: '32px 16px' }}>
+      <section style={{ maxWidth: 1000, margin: '0 auto' }}>
+        <h1 style={{ fontSize: 36, margin: 0 }}>Valuta la tua casa in 2 minuti</h1>
+        <p style={{ color: '#444', lineHeight: 1.6, marginTop: 8 }}>
+          Niente appuntamenti in agenzia: stima gratuita online e, se vuoi, report professionale o perizia completa.
+        </p>
+
+        <form name="stima" data-netlify="true" method="POST"
+          style={{ border: '1px solid #eee', borderRadius: 12, padding: 16, marginTop: 24, background: 'white', maxWidth: 500 }}>
+          <input type="hidden" name="form-name" value="stima" />
+          <h3>Calcolatore rapido</h3>
+
+          <label>Superficie (mq)
+            <input name="mq" type="number" placeholder="80"
+              style={{ width: '100%', padding: '10px 12px', border: '1px solid #ddd', borderRadius: 8, marginTop: 4 }} />
+          </label>
+
+          <label>Valore €/mq
+            <input name="base" type="number" placeholder="1500"
+              style={{ width: '100%', padding: '10px 12px', border: '1px solid #ddd', borderRadius: 8, marginTop: 4 }} />
+          </label>
+
+          <label>Stato
+            <select name="stato" style={{ width: '100%', padding: '10px 12px', border: '1px solid #ddd', borderRadius: 8, marginTop: 4 }}>
+              <option value="scadente">Da ristrutturare</option>
+              <option value="normale">Buono</option>
+              <option value="ristrutturato">Ristrutturato</option>
+              <option value="nuovo">Nuovo</option>
+            </select>
+          </label>
+
+          <button type="submit"
+            style={{ display: 'block', marginTop: 12, padding: '12px 16px', background: 'black', color: 'white', border: 'none', borderRadius: 10, cursor: 'pointer' }}>
+            Richiedi report gratuito
+          </button>
+        </form>
+      </section>
+    </main>
     );
 }
 

@@ -1,5 +1,9 @@
 "use client"
-import React from "react"
+import React from "react" import Pricing from "../components/Pricing"
+import Benefits from "../components/Benefits"
+import Testimonials from "../components/Testimonials"
+import FAQ from "../components/FAQ"
+
 
 function currency(n){ return new Intl.NumberFormat("it-IT",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(n||0) }
 function stimaValore({ mq, base, stato, piano, asc, box }) {

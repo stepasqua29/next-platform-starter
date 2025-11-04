@@ -152,7 +152,11 @@ export default function Page() {
           </div>
         </div>
       </section>
-    </main>
+    </main><Benefits />
+<Pricing onSelectPlan={(p)=>{/* salviamo la scelta del piano nel form hidden se vuoi */}} />
+<Testimonials />
+<FAQ />
+
   )
 }
 

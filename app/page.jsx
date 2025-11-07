@@ -402,4 +402,3 @@ const grid3 = { display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12 }
 const btn = { display: "inline-block", marginTop: 4, padding: "12px 16px", background: "#111", color: "#fff", border: "none", borderRadius: 12, cursor: "pointer" }
 const cta = { display: "inline-block", padding: "12px 16px", borderRadius: 12, background: "#111", color: "#fff", textDecoration: "none" }
 const ghostBtn = { display: "inline-block", marginTop: 12, padding: "10px 12px", borderRadius: 10, border: "1px solid #ddd", textDecoration: "none", color: "#111" }
-
